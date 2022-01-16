@@ -33,7 +33,7 @@ function encontrarMenor(edades) {
     return edadMenor;
 }
 
-function promedio(edades) {
+function calcularPromedio(edades) {
     let sumaEdades = 0;
 
     let cantidadDivisoria = edades.length++;
@@ -73,11 +73,12 @@ $botonIntegrantesFamilia.onclick = function () {
 
     const NUEVO_BOTON = document.createElement("input");
     NUEVO_BOTON.setAttribute("type", "submit");
+    NUEVO_BOTON.setAttribute("value", "Calcular");
     NUEVO_BOTON.setAttribute("id", "boton-calcular-edad");
 
     NUEVO_FORM.appendChild(NUEVO_BOTON);
     $cuerpoPagina.appendChild(NUEVO_FORM);
-    
+
     const $botonCalcular = document.querySelector("#boton-calcular-edad");
 
     $botonCalcular.onclick = function () {
@@ -85,6 +86,6 @@ $botonIntegrantesFamilia.onclick = function () {
 
         document.querySelector("#resultado-mayor-edad").innerHTML = `Tu familiar mas grande tiene ${encontrarMayor(EDAD_FAMILIARES)} años.`;
         document.querySelector("#resultado-menor-edad").innerHTML = `Tu familiar mas chico tiene ${encontrarMenor(EDAD_FAMILIARES)} años.`;
-        document.querySelector("#resultado-promedio-edad").innerHTML = `El promedio de edad de tus familiares es de ${promedio(EDAD_FAMILIARES)} años.`;
+        document.querySelector("#resultado-promedio-edad").innerHTML = `El promedio de edad de tus familiares es de ${calcularPromedio(EDAD_FAMILIARES)} años.`;
     };
 };
