@@ -49,6 +49,7 @@ $botonIntegrantesFamilia.onclick = function () {
     const CANTIDAD_FAMILIARES = Number(document.querySelector("#cantidad-integrantes-familia").value);
     const NUEVO_FORM = document.createElement("form");
     NUEVO_FORM.setAttribute("onsubmit", "return false;");
+    NUEVO_FORM.setAttribute("id", "form-calculo-integrantes");
 
     for (i = 0; i < CANTIDAD_FAMILIARES; i++) {
         let numero = i + 1;
@@ -76,7 +77,13 @@ $botonIntegrantesFamilia.onclick = function () {
     NUEVO_BOTON.setAttribute("value", "Calcular");
     NUEVO_BOTON.setAttribute("id", "boton-calcular-edad");
 
+    const NUEVO_BOTON_RESET = document.createElement("input");
+    NUEVO_BOTON_RESET.setAttribute("type", "button");
+    NUEVO_BOTON_RESET.setAttribute("value", "Volver a empezar");
+    NUEVO_BOTON_RESET.setAttribute("id", "boton-reset");
+
     NUEVO_FORM.appendChild(NUEVO_BOTON);
+    NUEVO_FORM.appendChild(NUEVO_BOTON_RESET);
     $cuerpoPagina.appendChild(NUEVO_FORM);
 
     const $botonCalcular = document.querySelector("#boton-calcular-edad");
@@ -87,5 +94,16 @@ $botonIntegrantesFamilia.onclick = function () {
         document.querySelector("#resultado-mayor-edad").innerHTML = `Tu familiar mas grande tiene ${encontrarMayor(EDAD_FAMILIARES)} años.`;
         document.querySelector("#resultado-menor-edad").innerHTML = `Tu familiar mas chico tiene ${encontrarMenor(EDAD_FAMILIARES)} años.`;
         document.querySelector("#resultado-promedio-edad").innerHTML = `El promedio de edad de tus familiares es de ${calcularPromedio(EDAD_FAMILIARES)} años.`;
+    };
+
+    const $botonReset = document.querySelector("#boton-reset");
+    const $formCalculoIntegrantes = document.querySelector("#form-calculo-integrantes");
+
+    $botonReset.onclick = function () {
+        $cuerpoPagina.removeChild($formCalculoIntegrantes);
+
+        document.querySelector("#resultado-mayor-edad").innerHTML = ``;
+        document.querySelector("#resultado-menor-edad").innerHTML = ``;
+        document.querySelector("#resultado-promedio-edad").innerHTML = ``;
     };
 };
