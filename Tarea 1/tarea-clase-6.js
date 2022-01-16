@@ -9,6 +9,42 @@ Punto bonus: Crear un botón para "empezar de nuevo" que empiece el proceso nuev
 const $botonIntegrantesFamilia = document.querySelector("#boton-integrantes");
 const $cuerpoPagina = document.querySelector("body");
 
+function encontrarMayor(edades) {
+    let edadMayor = 0;
+
+    for (i = 0; i < edades.length; i++) {
+        if (edadMayor < Number(edades[i].value)) {
+            edadMayor = Number(edades[i].value);
+        }
+    }
+
+    return edadMayor;
+}
+
+function encontrarMenor(edades) {
+    let edadMenor = Number(edades[0].value);
+
+    for (i = 1; i < edades.length; i++) {
+        if (edadMenor > Number(edades[i].value)) {
+            edadMenor = Number(edades[i].value);
+        }
+    }
+
+    return edadMenor;
+}
+
+function promedio(edades) {
+    let sumaEdades = 0;
+
+    let cantidadDivisoria = edades.length++;
+
+    for (i = 0; i < edades.length; i++) {
+        sumaEdades += Number(edades[i].value);
+    }
+
+    return sumaEdades / cantidadDivisoria;
+}
+
 $botonIntegrantesFamilia.onclick = function () {
     const CANTIDAD_FAMILIARES = Number(document.querySelector("#cantidad-integrantes-familia").value);
     const NUEVO_FORM = document.createElement("form");
@@ -41,4 +77,14 @@ $botonIntegrantesFamilia.onclick = function () {
 
     NUEVO_FORM.appendChild(NUEVO_BOTON);
     $cuerpoPagina.appendChild(NUEVO_FORM);
+    
+    const $botonCalcular = document.querySelector("#boton-calcular-edad");
+
+    $botonCalcular.onclick = function () {
+        const EDAD_FAMILIARES = document.querySelectorAll(".edad");
+
+        document.querySelector("#resultado-mayor-edad").innerHTML = `Tu familiar mas grande tiene ${encontrarMayor(EDAD_FAMILIARES)} años.`;
+        document.querySelector("#resultado-menor-edad").innerHTML = `Tu familiar mas chico tiene ${encontrarMenor(EDAD_FAMILIARES)} años.`;
+        document.querySelector("#resultado-promedio-edad").innerHTML = `El promedio de edad de tus familiares es de ${promedio(EDAD_FAMILIARES)} años.`;
+    };
 };
