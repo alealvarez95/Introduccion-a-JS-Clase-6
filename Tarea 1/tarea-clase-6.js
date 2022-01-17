@@ -57,7 +57,7 @@ $botonIntegrantesFamilia.onclick = function () {
         const NUEVO_DIV = document.createElement("div");
         const NUEVO_INPUT = document.createElement("input");
         const NUEVO_LABEL = document.createElement("label");
-        const NUEVO_TEXTO = document.createTextNode(`Familiar nº${numero}: `);
+        const NUEVO_TEXTO = document.createTextNode(`Edad del familiar nº${numero}: `);
 
         NUEVO_INPUT.setAttribute("id", `edad${numero}`);
         NUEVO_INPUT.setAttribute("type", "number");
