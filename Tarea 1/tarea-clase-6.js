@@ -72,6 +72,8 @@ $botonIntegrantesFamilia.onclick = function () {
         NUEVO_FORM.appendChild(NUEVO_DIV);
     }
 
+    const NUEVO_DIV = document.createElement("div");
+
     const NUEVO_BOTON = document.createElement("input");
     NUEVO_BOTON.setAttribute("type", "submit");
     NUEVO_BOTON.setAttribute("value", "Calcular");
@@ -82,8 +84,9 @@ $botonIntegrantesFamilia.onclick = function () {
     NUEVO_BOTON_RESET.setAttribute("value", "Volver a empezar");
     NUEVO_BOTON_RESET.setAttribute("id", "boton-reset");
 
-    NUEVO_FORM.appendChild(NUEVO_BOTON);
-    NUEVO_FORM.appendChild(NUEVO_BOTON_RESET);
+    NUEVO_DIV.appendChild(NUEVO_BOTON);
+    NUEVO_DIV.appendChild(NUEVO_BOTON_RESET);
+    NUEVO_FORM.appendChild(NUEVO_DIV);
     $cuerpoPagina.appendChild(NUEVO_FORM);
 
     const $botonCalcular = document.querySelector("#boton-calcular-edad");
