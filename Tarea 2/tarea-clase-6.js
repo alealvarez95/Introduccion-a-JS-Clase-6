@@ -9,6 +9,40 @@ Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como
 const $botonIntegrantesFamilia = document.querySelector("#boton-integrantes");
 const $cuerpoPagina = document.querySelector("body");
 
+function calcularSalarioMayor(sueldos) {
+    let salarioMayor = 0;
+
+    for (i = 0; i < sueldos.length; i++) {
+        if (salarioMayor < sueldos[i]) {
+            salarioMayor = sueldos[i];
+        }
+    }
+
+    return salarioMayor;
+}
+
+function calcularSalarioMenor(sueldos) {
+    let salarioMenor = sueldos[0];
+
+    for (i = 1; i < sueldos.length; i++) {
+        if (salarioMenor > sueldos[i]) {
+            salarioMenor = sueldos[i];
+        }
+    }
+
+    return salarioMenor;
+}
+
+function calcularPromedioSalarioAnual(sueldos, integrantes) {
+    let sueldosTotales = 0;
+
+    for (i = 0; i < integrantes; i++) {
+        sueldosTotales += sueldos[i];
+    }
+
+    return sueldosTotales / integrantes;
+}
+
 $botonIntegrantesFamilia.onclick = function () {
     const CANTIDAD_FAMILIARES = Number(document.querySelector("#cantidad-integrantes-familia").value);
     const NUEVO_FORM = document.createElement("form");
@@ -52,7 +86,27 @@ $botonIntegrantesFamilia.onclick = function () {
 
     const $botonCalcular = document.querySelector("#boton-calcular-sueldo");
 
-    $botonCalcular.onclick = function () {};
+    $botonCalcular.onclick = function () {
+        const SUELDOS_FAMILIARES = document.querySelectorAll(".sueldo");
+
+        let cantidadSueldos = 0;
+        const LISTA_SUELDOS = [];
+
+        for (i = 0; i < SUELDOS_FAMILIARES.length; i++) {
+            if (SUELDOS_FAMILIARES[i].value === "") {
+            } else {
+                cantidadSueldos++;
+                LISTA_SUELDOS.push(Number(SUELDOS_FAMILIARES[i].value));
+            }
+        }
+
+        const SALARIO_ANUAL_PROMEDIO = calcularPromedioSalarioAnual(LISTA_SUELDOS, cantidadSueldos);
+
+        document.querySelector("#mayor-salario-anual").innerHTML = `El salario anual mayor de la familia es de $${calcularSalarioMayor(LISTA_SUELDOS)}.`;
+        document.querySelector("#menor-salario-anual").innerHTML = `El salario anual menor de la familia es de $${calcularSalarioMenor(LISTA_SUELDOS)}.`;
+        document.querySelector("#salario-anual-promedio").innerHTML = `El salario anual promedio de la familia es de $${SALARIO_ANUAL_PROMEDIO}.`;
+        document.querySelector("#salario-mensual-promedio").innerHTML = `El salario mensual promedio de la familia es de $${SALARIO_ANUAL_PROMEDIO / 12}.`;
+    };
 
     const $botonReset = document.querySelector("#boton-reset");
     const $formCalculoIntegrantes = document.querySelector("#form-calculo-integrantes");
