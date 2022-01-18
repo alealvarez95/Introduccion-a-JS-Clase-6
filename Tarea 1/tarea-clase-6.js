@@ -48,7 +48,7 @@ function calcularEdadPromedio(edades) {
 $botonIntegrantesFamilia.onclick = function () {
     const cantidadFamiliares = Number(document.querySelector("#cantidad-integrantes-familia").value);
     const nuevoForm = document.createElement("form");
-    nuevoForm.setAttribute("onsubmit", "return false;");
+    nuevoForm.onsubmit = function(){return false;}
     nuevoForm.setAttribute("id", "form-calculo-integrantes");
 
     for (i = 0; i < cantidadFamiliares; i++) {
