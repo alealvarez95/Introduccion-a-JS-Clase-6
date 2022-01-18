@@ -33,20 +33,22 @@ function calcularSalarioMenor(salarios) {
     return salarioMenor;
 }
 
-function calcularPromedioSalarioAnual(salarios, integrantes) {
+function calcularPromedioSalarioAnual(salarios) {
     let salariosTotales = 0;
 
-    for (i = 0; i < integrantes; i++) {
+    for (i = 0; i < salarios.length; i++) {
         salariosTotales += salarios[i];
     }
 
-    return salariosTotales / integrantes;
+    return salariosTotales / salarios.length;
 }
 
 $botonIntegrantesFamilia.onclick = function () {
     const cantidadFamiliares = Number(document.querySelector("#cantidad-integrantes-familia").value);
     const nuevoForm = document.createElement("form");
-    nuevoForm.onsubmit = function(){return false;}
+    nuevoForm.onsubmit = function () {
+        return false;
+    };
     nuevoForm.setAttribute("id", "form-calculo-integrantes");
 
     for (i = 0; i < cantidadFamiliares; i++) {
@@ -92,18 +94,16 @@ $botonIntegrantesFamilia.onclick = function () {
     $botonCalcular.onclick = function () {
         const salariosFamiliares = document.querySelectorAll(".salario");
 
-        let cantidadSalarios = 0;
         const listaSalarios = [];
 
         for (i = 0; i < salariosFamiliares.length; i++) {
             if (salariosFamiliares[i].value === "") {
             } else {
-                cantidadSalarios++;
                 listaSalarios.push(Number(salariosFamiliares[i].value));
             }
         }
 
-        const salarioAnualPromedio = calcularPromedioSalarioAnual(listaSalarios, cantidadSalarios);
+        const salarioAnualPromedio = calcularPromedioSalarioAnual(listaSalarios);
 
         document.querySelector("#mayor-salario-anual").innerHTML = `El salario anual mayor de la familia es de $${calcularSalarioMayor(listaSalarios)}.`;
         document.querySelector("#menor-salario-anual").innerHTML = `El salario anual menor de la familia es de $${calcularSalarioMenor(listaSalarios)}.`;
