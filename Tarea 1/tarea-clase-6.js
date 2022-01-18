@@ -13,8 +13,8 @@ function encontrarEdadMayor(edades) {
     let edadMayor = 0;
 
     for (i = 0; i < edades.length; i++) {
-        if (edadMayor < Number(edades[i].value)) {
-            edadMayor = Number(edades[i].value);
+        if (edadMayor < edades[i]) {
+            edadMayor = edades[i];
         }
     }
 
@@ -22,11 +22,11 @@ function encontrarEdadMayor(edades) {
 }
 
 function encontrarEdadMenor(edades) {
-    let edadMenor = Number(edades[0].value);
+    let edadMenor = edades[0];
 
     for (i = 1; i < edades.length; i++) {
-        if (edadMenor > Number(edades[i].value)) {
-            edadMenor = Number(edades[i].value);
+        if (edadMenor > edades[i]) {
+            edadMenor = edades[i];
         }
     }
 
@@ -36,19 +36,19 @@ function encontrarEdadMenor(edades) {
 function calcularEdadPromedio(edades) {
     let sumaEdades = 0;
 
-    let cantidadDivisoria = edades.length++;
-
     for (i = 0; i < edades.length; i++) {
-        sumaEdades += Number(edades[i].value);
+        sumaEdades += edades[i];
     }
 
-    return sumaEdades / cantidadDivisoria;
+    return sumaEdades / edades.length;
 }
 
 $botonIntegrantesFamilia.onclick = function () {
     const cantidadFamiliares = Number(document.querySelector("#cantidad-integrantes-familia").value);
     const nuevoForm = document.createElement("form");
-    nuevoForm.onsubmit = function(){return false;}
+    nuevoForm.onsubmit = function () {
+        return false;
+    };
     nuevoForm.setAttribute("id", "form-calculo-integrantes");
 
     for (i = 0; i < cantidadFamiliares; i++) {
@@ -94,9 +94,18 @@ $botonIntegrantesFamilia.onclick = function () {
     $botonCalcular.onclick = function () {
         const edadFamiliares = document.querySelectorAll(".edad");
 
-        document.querySelector("#resultado-mayor-edad").innerHTML = `Tu familiar mas grande tiene ${encontrarEdadMayor(edadFamiliares)} años.`;
-        document.querySelector("#resultado-menor-edad").innerHTML = `Tu familiar mas chico tiene ${encontrarEdadMenor(edadFamiliares)} años.`;
-        document.querySelector("#resultado-promedio-edad").innerHTML = `El promedio de edad de tus familiares es de ${calcularEdadPromedio(edadFamiliares)} años.`;
+        const listaEdades = [];
+
+        for (i = 0; i < edadFamiliares.length; i++) {
+            if (edadFamiliares[i].value === "") {
+            } else {
+                listaEdades.push(Number(edadFamiliares[i].value));
+            }
+        }
+
+        document.querySelector("#resultado-mayor-edad").innerHTML = `Tu familiar mas grande tiene ${encontrarEdadMayor(listaEdades)} años.`;
+        document.querySelector("#resultado-menor-edad").innerHTML = `Tu familiar mas chico tiene ${encontrarEdadMenor(listaEdades)} años.`;
+        document.querySelector("#resultado-promedio-edad").innerHTML = `El promedio de edad de tus familiares es de ${calcularEdadPromedio(listaEdades)} años.`;
     };
 
     const $botonReset = document.querySelector("#boton-reset");
