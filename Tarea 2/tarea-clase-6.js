@@ -44,71 +44,71 @@ function calcularPromedioSalarioAnual(sueldos, integrantes) {
 }
 
 $botonIntegrantesFamilia.onclick = function () {
-    const CANTIDAD_FAMILIARES = Number(document.querySelector("#cantidad-integrantes-familia").value);
-    const NUEVO_FORM = document.createElement("form");
-    NUEVO_FORM.setAttribute("onsubmit", "return false;");
-    NUEVO_FORM.setAttribute("id", "form-calculo-integrantes");
+    const cantidadFamiliares = Number(document.querySelector("#cantidad-integrantes-familia").value);
+    const nuevoForm = document.createElement("form");
+    nuevoForm.setAttribute("onsubmit", "return false;");
+    nuevoForm.setAttribute("id", "form-calculo-integrantes");
 
-    for (i = 0; i < CANTIDAD_FAMILIARES; i++) {
+    for (i = 0; i < cantidadFamiliares; i++) {
         let numero = i + 1;
 
-        const NUEVO_DIV = document.createElement("div");
-        const NUEVO_INPUT = document.createElement("input");
-        const NUEVO_LABEL = document.createElement("label");
-        const NUEVO_TEXTO = document.createTextNode(`Salario anual del familiar nº${numero}: `);
+        const nuevoDiv = document.createElement("div");
+        const nuevoInput = document.createElement("input");
+        const nuevoLabel = document.createElement("label");
+        const nuevoTexto = document.createTextNode(`Salario anual del familiar nº${numero}: `);
 
-        NUEVO_INPUT.setAttribute("id", `sueldo${numero}`);
-        NUEVO_INPUT.setAttribute("type", "number");
-        NUEVO_INPUT.setAttribute("class", "sueldo");
+        nuevoInput.setAttribute("id", `sueldo${numero}`);
+        nuevoInput.setAttribute("type", "number");
+        nuevoInput.setAttribute("class", "sueldo");
 
-        NUEVO_LABEL.setAttribute("for", `sueldo${numero}`);
-        NUEVO_LABEL.appendChild(NUEVO_TEXTO);
+        nuevoLabel.setAttribute("for", `sueldo${numero}`);
+        nuevoLabel.appendChild(nuevoTexto);
 
-        NUEVO_DIV.appendChild(NUEVO_LABEL);
-        NUEVO_DIV.appendChild(NUEVO_INPUT);
+        nuevoDiv.appendChild(nuevoLabel);
+        nuevoDiv.appendChild(nuevoInput);
 
-        NUEVO_FORM.appendChild(NUEVO_DIV);
+        nuevoForm.appendChild(nuevoDiv);
     }
 
-    const NUEVO_DIV = document.createElement("div");
+    const nuevoDiv = document.createElement("div");
 
-    const NUEVO_BOTON = document.createElement("input");
-    NUEVO_BOTON.setAttribute("type", "submit");
-    NUEVO_BOTON.setAttribute("value", "Calcular");
-    NUEVO_BOTON.setAttribute("id", "boton-calcular-sueldo");
+    const nuevoBoton = document.createElement("input");
+    nuevoBoton.setAttribute("type", "submit");
+    nuevoBoton.setAttribute("value", "Calcular");
+    nuevoBoton.setAttribute("id", "boton-calcular-sueldo");
 
-    const NUEVO_BOTON_RESET = document.createElement("input");
-    NUEVO_BOTON_RESET.setAttribute("type", "button");
-    NUEVO_BOTON_RESET.setAttribute("value", "Volver a empezar");
-    NUEVO_BOTON_RESET.setAttribute("id", "boton-reset");
+    const nuevoBotonReset = document.createElement("input");
+    nuevoBotonReset.setAttribute("type", "button");
+    nuevoBotonReset.setAttribute("value", "Volver a empezar");
+    nuevoBotonReset.setAttribute("id", "boton-reset");
 
-    NUEVO_DIV.appendChild(NUEVO_BOTON);
-    NUEVO_DIV.appendChild(NUEVO_BOTON_RESET);
-    NUEVO_FORM.appendChild(NUEVO_DIV);
-    $cuerpoPagina.appendChild(NUEVO_FORM);
+    nuevoDiv.appendChild(nuevoBoton);
+    nuevoDiv.appendChild(nuevoBotonReset);
+    nuevoForm.appendChild(nuevoDiv);
+    $cuerpoPagina.appendChild(nuevoForm);
 
     const $botonCalcular = document.querySelector("#boton-calcular-sueldo");
 
     $botonCalcular.onclick = function () {
-        const SUELDOS_FAMILIARES = document.querySelectorAll(".sueldo");
+        const sueldosFamiliares = document.querySelectorAll(".sueldo");
 
         let cantidadSueldos = 0;
-        const LISTA_SUELDOS = [];
+        const listaSueldos = [];
 
-        for (i = 0; i < SUELDOS_FAMILIARES.length; i++) {
-            if (SUELDOS_FAMILIARES[i].value === "") {
+        for (i = 0; i < sueldosFamiliares.length; i++) {
+            if (sueldosFamiliares[i].value === "") {
             } else {
                 cantidadSueldos++;
-                LISTA_SUELDOS.push(Number(SUELDOS_FAMILIARES[i].value));
+                listaSueldos.push(Number(sueldosFamiliares[i].value));
             }
         }
 
-        const SALARIO_ANUAL_PROMEDIO = calcularPromedioSalarioAnual(LISTA_SUELDOS, cantidadSueldos);
+        const salarioAnualPromedio = calcularPromedioSalarioAnual(listaSueldos, cantidadSueldos);
 
-        document.querySelector("#mayor-salario-anual").innerHTML = `El salario anual mayor de la familia es de $${calcularSalarioMayor(LISTA_SUELDOS)}.`;
-        document.querySelector("#menor-salario-anual").innerHTML = `El salario anual menor de la familia es de $${calcularSalarioMenor(LISTA_SUELDOS)}.`;
-        document.querySelector("#salario-anual-promedio").innerHTML = `El salario anual promedio de la familia es de $${SALARIO_ANUAL_PROMEDIO}.`;
-        document.querySelector("#salario-mensual-promedio").innerHTML = `El salario mensual promedio de la familia es de $${SALARIO_ANUAL_PROMEDIO / 12}.`;
+        document.querySelector("#mayor-salario-anual").innerHTML = `El salario anual mayor de la familia es de $${calcularSalarioMayor(listaSueldos)}.`;
+        document.querySelector("#menor-salario-anual").innerHTML = `El salario anual menor de la familia es de $${calcularSalarioMenor(listaSueldos)}.`;
+        document.querySelector("#salario-anual-promedio").innerHTML = `El salario anual promedio de la familia es de $${salarioAnualPromedio}.`;
+        document.querySelector("#salario-mensual-promedio").innerHTML = `El salario mensual promedio de la familia es de $${salarioAnualPromedio / 12}.`;
     };
 
     const $botonReset = document.querySelector("#boton-reset");
